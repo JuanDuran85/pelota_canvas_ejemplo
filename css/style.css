@@ -2,3 +2,7 @@
     margin: 0;
     padding: 0;
 }
+
+canvas {
+    transform: translate(50px,50px);
+}

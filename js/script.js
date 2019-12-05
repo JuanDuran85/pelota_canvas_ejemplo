@@ -2,8 +2,6 @@
 let canvas = document.getElementById('canvas');
 let context = canvas.getContext('2d');
 
-let pelota = new Pelota(); //definiendo el objeto pelota
-
 //constructor de la pelota
 let Pelota = function () {
     this.x = 200;
@@ -23,11 +21,30 @@ let circulo = function (x,y,radio,llenarCirculo) {
     };
 };
 
-//metodo para dibujar
+//metodo para dibujar el circulo y llenar el circulo
 Pelota.prototype.dibujo = function () {  
-    circulo(this.x, this.y, 10, thue);
+    circulo(this.x, this.y, 10, true);
 };
 
+//metodo para mover a la pelota
+Pelota.prototype.mover = function () {  
+    this.x += this.xVelocidad;
+    this.y += this.yVelocidad;
+};
+
+//metodo para que rebote la pelota con los bordes
+Pelota.prototype.tocaBorde = function () {  
+    if (this.x < 10 || this.x > 390) {
+        this.xVelocidad = -this.xVelocidad;
+    };
+    if (this.y < 10 || this.y > 390) {
+        this.yVelocidad = - this.yVelocidad;  
+    };
+};
+
+let pelota = new Pelota(); //definiendo el objeto pelota
+
+// se activa la cunfion cada 30 milisegundos
 setInterval(function(){  
     context.clearRect(0, 0, 400, 400); // se limpia el canvas
     pelota.dibujo(); // se dibuja la pelota
